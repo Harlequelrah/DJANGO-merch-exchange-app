@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Band,Listing
+
+
 # Create your views here.
 def hello(request):
     bands=Band.objects.all()
@@ -9,11 +11,12 @@ def hello(request):
         'second_band':bands[1],
         'third_band':bands[2]
     }
-
     return render(request,"hello.html",{'bands':bands})
 
 
-
+def band(request):
+    bands=Band.Objects.all()
+    return render(request,"band.html",{'bands':bands})
 
 
 
