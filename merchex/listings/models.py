@@ -8,6 +8,8 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 
 # Create your models here.
 class Band(M):
+  def __str__(self):
+    return f'{self.name}'
   class Genre(m.TextChoices):
     HIP_HOP = 'HH'
     SYNTH_POP = 'SP'
@@ -31,6 +33,8 @@ class Band(M):
 
 
 class Listing(M):
+  def __str__(self):
+    return f"{self.title}"
   class Type(m.TextChoices):
     DISQUE='DSQ'
     VETEMENT='VTM'
@@ -41,4 +45,8 @@ class Listing(M):
   description=m.CharField(max_length=256 ,null=True)
   sold=m.BooleanField(default=False)
   year=m.IntegerField(null=True,validators=[MinValueValidator(2000)])
-  types=m.CharField(choices=Type.choices,max_length=25)
+  type=m.CharField(choices=Type.choices,max_length=25)
+  band=m.ForeignKey(Band,null=True,on_delete=m.SET_NULL)
+''' like_new=m.CharField(max_length=29,null=True)
+(env) ~/projects/django-web-app/merchex
+→ rm listings/migrations/0006_band_like_new.py  # nous pouvons ainsi la supprimer, mais ne le faisons pas pour le moment !'''
