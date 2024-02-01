@@ -1,12 +1,12 @@
 {%  extends "base.html" %}
 {% block content %}
         {% if listings %}
-        <p>Mes annonces  ({{listings|length}}) sont :</p>
+        <p>Annonces :</p>
         {% endif %}
         <!-- TODO : liste des groupes -->
         <ul>
             {% for listing in listings %}
-            <li> {{listing.title}}</li>
+            <li><a href="{% url 'listing_detail' listing.id %}"> {{listing.title}}</li><a/>
             {% endfor %}
         </ul>
 
