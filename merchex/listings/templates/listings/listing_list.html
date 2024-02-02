@@ -9,5 +9,5 @@
             <li><a href="{% url 'listing_detail' listing.id %}"> {{listing.title}}</li><a/>
             {% endfor %}
         </ul>
-
+        <a href="{% url 'listing_create' %}">Créer un nouvel Article</a>
 {% endblock  %}

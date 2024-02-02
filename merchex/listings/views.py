@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import HttpResponseNotFound,HttpResponse,Http404
 from .models import Band,Listing
+from .forms import ContactUsForm,BandForm,ListingForm
+from django.core.mail import send_mail
 
 
 # Create your views here.
@@ -21,11 +23,30 @@ def listing_list(request):
 
 
 def about(request):
-     return render(request,"contact.html")
+    return render(request,"about.html")
+
+def email_sent(request):
+    return render(request,"email_sent.html")
 
 
-def contact(request):
-    return render(request,"contact.html")
+def contact(request,*args,**kwargs):
+    if request.method=='POST':
+        form=ContactUsForm(request.POST)
+        if form.is_valid():
+            send_mail(
+                subject=f"Message from {form.cleaned_data["name"]or "anonymous"} Via Merchex Contact Us Form",
+                message=form.cleaned_data["message"],
+                from_email=form.cleaned_data["email"],
+                recipient_list=['degbovimax19@gmail.com'],
+            )
+            return redirect(email_sent)
+
+    else:form=ContactUsForm()
+    # print('La méthode de requête est : ', request.method)
+    # print('Les données POST sont : ', request.POST)
+    return render(request,"contact.html",{'form':form})
+
+
 
 def band_detail(request,band_id:int):
     try:
@@ -42,3 +63,21 @@ def listing_detail(request,listing_id:int):
     except Listing.DoesNotExist:
         return render(request, "404.html", {'message': "L ' article demandée n'existe pas."})
 
+def band_create(request):
+    if request.method=='POST':
+        form=BandForm(request.POST)
+        if form.is_valid():
+            band=form.save()
+            return redirect('band_detail',band.id)
+    else:form=BandForm()
+    return render(request,"band_create.html",{'form':form})
+
+
+def listing_create(request):
+    if request.method=='POST':
+        form=ListingForm(request.POST)
+        if form.is_valid():
+            listing=form.save()
+            return redirect('listing_detail',listing.id)
+    else:form=ListingForm()
+    return render(request,"band_create.html",{'form':form})

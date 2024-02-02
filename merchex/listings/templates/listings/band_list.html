@@ -7,4 +7,5 @@
         <li> <a href="{% url 'band_detail' band.id %}">{{band.name}}</a></li>
         {% endfor %}
 </ul>
+<a href="{% url 'band_create' %}">Créer un nouveau groupe</a>
 {% endblock %}
