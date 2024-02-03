@@ -1,0 +1,12 @@
+
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<h2>Etes vous sûre de vouloir supprimer ?</h2>
+ <p>Voulez vous vraiment supprimer l' article {{listing.title}}? Cette action est irréversible</p>
+
+<form action="" method="POST">
+  {% csrf_token %}
+  <input type="submit" value="Supprimer">
+</form>
+ {% endblock %}

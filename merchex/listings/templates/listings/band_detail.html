@@ -12,8 +12,8 @@
  {% endif %}
 </ul>
 
-<p>{{ band.biography }}</p>
+<p>{{ band.biographie }}</p>
 
-{% comment %} <a href="{% url 'band_list' %}">Retour à tous les groupes</a> {% endcomment %}
+<a href="{% url 'band_update' band.id %}">Modifier les informations</a>
 
 {% endblock %}

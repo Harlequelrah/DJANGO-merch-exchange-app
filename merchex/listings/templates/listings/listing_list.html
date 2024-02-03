@@ -6,7 +6,11 @@
         <!-- TODO : liste des groupes -->
         <ul>
             {% for listing in listings %}
-            <li><a href="{% url 'listing_detail' listing.id %}"> {{listing.title}}</li><a/>
+            <li>
+                <a href="{% url 'listing_detail' listing.id %}"> {{listing.title}}<a/>
+                    - <a href="{% url 'listing_update' listing.id %}">[modifier]</a>
+                    - <a href="{% url 'listing_delete' listing.id %}">[Supprimer]</a>
+                </li>
             {% endfor %}
         </ul>
         <a href="{% url 'listing_create' %}">Créer un nouvel Article</a>
