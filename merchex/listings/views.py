@@ -43,10 +43,10 @@ def contact(request,*args,**kwargs):
             return redirect(email_sent)
 
     else:form=ContactUsForm()
-    # print('La méthode de requête est : ', request.method)
-    # print('Les données POST sont : ', request.POST)
-    return render(request,"contact.html",{'form':form})
 
+    return render(request,"contact.html",{'form':form})
+ # print('La méthode de requête est : ', request.method)
+    # print('Les données POST sont : ', request.POST)
 
 
 def band_detail(request,band_id:int):
